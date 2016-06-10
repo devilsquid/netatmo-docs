@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>Reference</title>
+    <!--link rel="stylesheet" href="ldoc.css" type="text/css" /-->
+    <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=BenchNine:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://devilsquid.com/files/docs-base-min.css">
+    <link rel="stylesheet" href="https://devilsquid.com/files/docs-pure-min.css">
+    <link rel="stylesheet" href="https://devilsquid.com/files/docs-side-menu.css">
+    <link rel="stylesheet" href="https://devilsquid.com/files/docs-content.css">
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="layout">
+
+
+<!-- Menu -->
+
+<div id="menu">
+<div class="pure-menu">
+<div class="DS-logo"><a href="https://devilsquid.com"><img src="https://devilsquid.com/wp-content/uploads/2016/05/logotext-devilsquid_white@2x.png"></a></div>
+<br/>
+<h3>Netatmo</h3>
+<h5>netatmo.lua</h5>
+
+
+
+<h4>Functions</h4>
+<ul class="nowrap pure-menu-list">
+    <li class="pure-menu-item"><a href="#new">new()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:Connect">netatmo:Connect()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:GetStationData">netatmo:GetStationData()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:HasAccessToken">netatmo:HasAccessToken()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:HasExpiredToken">netatmo:HasExpiredToken()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:HasExpiredWeatherData">netatmo:HasExpiredWeatherData()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:RefreshToken">netatmo:RefreshToken()</a></li>
+    <li class="pure-menu-item"><a href="#netatmo:RequestStationsData">netatmo:RequestStationsData()</a></li>
+</ul>
+
+
+</div><!-- .pure-menu -->
+</div><!-- #menu -->
+
+<div id="main">
+
+<div class="header">
+<h2>Get weather data from your Netatmo weather station.</h2>
+<h1>Netatmo Module</h1>
+<p> Retrieve ultra-local weather conditions from your Netatmo weather station. <br><br>
+ This module is developed by <a href="https://devilssquid.com">DevilSquid</a> – your learning resource for Corona SDK.</p>
+
+    <table class="pure-table pure-table-horizontal">
+    <thead><tr><th><strong>Info</strong></th><th></th></tr></thead>
+        <tr><td><strong>Copyright</strong></td><td><a href="https://devilssquid.com">DevilSquid</a>, René Aye 2016</td></tr>
+        <tr><td><strong>License</strong></td><td> Commercial<br>
+ <span style="font-size: 0.8em;">You are allowed to use the code for any private and commercial projects.
+ You are not allowed to share the code.
+ The module can be obtained through a paid membership at devilsquid.com</span></td></tr>
+        <tr><td><strong>Author</strong></td><td>René Aye</td></tr>
+      <tr><td><strong>Last updated</strong></td><td>2016-06-10 11:26:40</td></tr>
+    </table>
+</div><!-- .header -->
+
+<div class="content">
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list pure-table pure-table-striped">
+	<tr>
+	<td class="name" nowrap><a href="#new">new (options)</a></td>
+	<td class="summary">Create a new Netatmo object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:Connect">netatmo:Connect ()</a></td>
+	<td class="summary">Creates a web login requester to allow the app to connect your Netatmo data.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:GetStationData">netatmo:GetStationData (optStationName, optDataKind, optWithUnits)</a></td>
+	<td class="summary">Read local saved stations data</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:HasAccessToken">netatmo:HasAccessToken ()</a></td>
+	<td class="summary">Checks if access tokens are found</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:HasExpiredToken">netatmo:HasExpiredToken ()</a></td>
+	<td class="summary">Checks if the access token has been expired</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:HasExpiredWeatherData">netatmo:HasExpiredWeatherData ()</a></td>
+	<td class="summary">Checks if the weather data has been expired</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:RefreshToken">netatmo:RefreshToken (callbackFunction)</a></td>
+	<td class="summary">Send a refresh token request to netatmo server.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#netatmo:RequestStationsData">netatmo:RequestStationsData (callbackFunction)</a></td>
+	<td class="summary">RequestStationsData</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "new"></a>
+    <strong>new (options)</strong>
+    </dt>
+    <dd>
+    Create a new Netatmo object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">options</span>
+         a table with options</p>
+
+<ul>
+<li><code>clientID</code>:       (<strong>string</strong>) client id you have to create at the Netamo API site</li>
+<li><code>clientSecret</code>:   (<strong>number</strong>) client secret you have to create at the Netamo API site</li>
+<li><code>scope</code>:          (<strong>number</strong>) the scope of the request to the Netamo server  (<em>default</em>: &ldquo;read_station&rdquo;)</li>
+<li><code>callback</code>:       (<strong>function</strong>) a callback function outside of this module that gets called when weather data is ready to be read</li>
+<li><code>dataExpire</code>:     (<strong>number</strong>) how long it takes until the weather data has to be reloaded in seconds (<em>default</em>: 600)</li>
+</ul>
+
+
+<p> After <em>*new()</em> has been called, two events might be dispatched to the callback function:
+ &ndash; ready shows that the weather data has been loaded and can now be requested
+ &ndash; notoken shows that no token has been found, you should display a Coonnect button to connect to Netatmo server</p>
+
+<p> <br><strong>Read further informations in the Netatmo API</strong><br>
+ Link to the <a href="https://dev.netatmo.com/dev/resources/technical/introduction">Netatmo API Docs</a>
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        netatmo object
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> Netatmo = <span class="global">require</span>( <span class="string">"devilsquid.weather.netatmo"</span> )
+
+ <span class="keyword">local</span> <span class="keyword">function</span> NetatmoListener( event )
+     <span class="keyword">if</span> event.<span class="global">type</span> == <span class="string">"ready"</span> <span class="keyword">then</span>
+         <span class="keyword">local</span> temperature1 = event.netatmo:GetStationData(<span class="string">"Inside"</span>, <span class="string">"temp"</span>)
+         <span class="keyword">local</span> temperature2 = event.netatmo:GetStationData(<span class="string">"Outside"</span>, <span class="string">"temp"</span>)
+         <span class="global">print</span>(<span class="string">"Inside temperature:"</span>, temperature1)
+         <span class="global">print</span>(<span class="string">"Outside temperature:"</span>, temperature2)
+     <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> weather = Netatmo:new( NetatmoListener )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "netatmo:Connect"></a>
+    <strong>netatmo:Connect ()</strong>
+    </dt>
+    <dd>
+    Creates a web login requester to allow the app to connect your Netatmo data.
+ This method should only called once: at the first time the app starts. After that
+ you should onyl call refresh token from Netatmo API server. (But this module handles this)</p>
+
+<p> After connection has been established a &ldquo;ready&rdquo; event will be dispatched to the callback function
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        nothing
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "netatmo:GetStationData"></a>
+    <strong>netatmo:GetStationData (optStationName, optDataKind, optWithUnits)</strong>
+    </dt>
+    <dd>
+    Read local saved stations data
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">optStationName</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         the name of the module or station you want to read some kind of value from
+        </li>
+        <li><span class="parameter">optDataKind</span>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
+         what kind of data you want to read
+        </li>
+        <li><span class="parameter">optWithUnits</span>
+            <span class="types"><span class="type">bool</span></span>
+         true if units schould be added to the return value string, default = false
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the value of the requested data
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">
+ <span class="keyword">local</span> <span class="keyword">function</span> NetatmoListener( event )
+  <span class="keyword">if</span> event.<span class="global">type</span> == <span class="string">"ready"</span> <span class="keyword">then</span>
+      <span class="global">print</span>(<span class="string">"Inside Temperature"</span>, event.netatmo:GetStationData(<span class="string">"Inside"</span>, <span class="string">"temp"</span>, <span class="keyword">true</span>))
+  <span class="keyword">end</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> weather = Netatmo:new( NetatmoListener )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "netatmo:HasAccessToken"></a>
+    <strong>netatmo:HasAccessToken ()</strong>
+    </dt>
+    <dd>
+    Checks if access tokens are found  If no access token is found this might be the first start of the app
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        true if an access token has been found
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "netatmo:HasExpiredToken"></a>
+    <strong>netatmo:HasExpiredToken ()</strong>
+    </dt>
+    <dd>
+    Checks if the access token has been expired
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        true if token has been expired
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "netatmo:HasExpiredWeatherData"></a>
+    <strong>netatmo:HasExpiredWeatherData ()</strong>
+    </dt>
+    <dd>
+    Checks if the weather data has been expired  Netatmo weather stations do refresh their weather data every 10 minutes
+ so after 10 minutes the weather data is set to be expired
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        true if the weather data has been expired
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "netatmo:RefreshToken"></a>
+    <strong>netatmo:RefreshToken (callbackFunction)</strong>
+    </dt>
+    <dd>
+    Send a refresh token request to netatmo server.
+ The netatmo access token has a loimited lifetime of three hours.
+ After three hours you have to refresh the access token, before you can
+ make any further data requests.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callbackFunction</span>
+         gets called when the access token has been refreshed
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        nothing
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "netatmo:RequestStationsData"></a>
+    <strong>netatmo:RequestStationsData (callbackFunction)</strong>
+    </dt>
+    <dd>
+    RequestStationsData  Requests the stations weather data from Netatmo server
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">callbackFunction</span>
+         gets called when the access token has been refreshed
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        nothing
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- .content -->
+</div> <!-- #main -->
+
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-06-10 11:26:40 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
