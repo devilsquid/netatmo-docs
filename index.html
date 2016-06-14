@@ -43,11 +43,6 @@
     <li class="pure-menu-item"><a href="#new">new()</a></li>
     <li class="pure-menu-item"><a href="#netatmo:Connect">netatmo:Connect()</a></li>
     <li class="pure-menu-item"><a href="#netatmo:GetStationData">netatmo:GetStationData()</a></li>
-    <li class="pure-menu-item"><a href="#netatmo:HasAccessToken">netatmo:HasAccessToken()</a></li>
-    <li class="pure-menu-item"><a href="#netatmo:HasExpiredToken">netatmo:HasExpiredToken()</a></li>
-    <li class="pure-menu-item"><a href="#netatmo:HasExpiredWeatherData">netatmo:HasExpiredWeatherData()</a></li>
-    <li class="pure-menu-item"><a href="#netatmo:RefreshToken">netatmo:RefreshToken()</a></li>
-    <li class="pure-menu-item"><a href="#netatmo:RequestStationsData">netatmo:RequestStationsData()</a></li>
 </ul>
 
 
@@ -59,8 +54,15 @@
 <div class="header">
 <h2>Get weather data from your Netatmo weather station.</h2>
 <h1>Netatmo Module</h1>
-<p> Retrieve ultra-local weather conditions from your Netatmo weather station. <br><br>
- This module is developed by <a href="https://devilssquid.com">DevilSquid</a> – your learning resource for Corona SDK.</p>
+<p> Retrieve ultra-local weather conditions from your Netatmo weather station.
+ <br><br>
+ In order to use the API, you will need some API tokens. You can sign up at <a href="https://www.netatmo.com/site/connect#/general" target="_new">https://www.netatmo.com/site/connect#/general</a>.<br>
+ Furthermore I recommend to study the API developer docs you can find at <a href="https://dev.netatmo.com/dev/resources/technical/introduction" target="_new">https://dev.netatmo.com/dev/resources/technical/introduction</a>
+ <br><br>
+ This module is developed by <a href="https://devilssquid.com">DevilSquid</a> – your learning resource for Corona SDK.
+ <br><br>
+ <strong>Please make sure what the Terms of Use of this API service are. This module is a connection to a third party API service to use their data. Have in mind that these services do
+ have their own requirements and attribution guidelines you have to comply with.</strong></p>
 
     <table class="pure-table pure-table-horizontal">
     <thead><tr><th><strong>Info</strong></th><th></th></tr></thead>
@@ -70,7 +72,7 @@
  You are not allowed to share the code.
  The module can be obtained through a paid membership at devilsquid.com</span></td></tr>
         <tr><td><strong>Author</strong></td><td>René Aye</td></tr>
-      <tr><td><strong>Last updated</strong></td><td>2016-06-10 11:26:40</td></tr>
+      <tr><td><strong>Last updated</strong></td><td>2016-06-14 08:53:14</td></tr>
     </table>
 </div><!-- .header -->
 
@@ -90,26 +92,6 @@
 	<tr>
 	<td class="name" nowrap><a href="#netatmo:GetStationData">netatmo:GetStationData (optStationName, optDataKind, optWithUnits)</a></td>
 	<td class="summary">Read local saved stations data</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#netatmo:HasAccessToken">netatmo:HasAccessToken ()</a></td>
-	<td class="summary">Checks if access tokens are found</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#netatmo:HasExpiredToken">netatmo:HasExpiredToken ()</a></td>
-	<td class="summary">Checks if the access token has been expired</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#netatmo:HasExpiredWeatherData">netatmo:HasExpiredWeatherData ()</a></td>
-	<td class="summary">Checks if the weather data has been expired</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#netatmo:RefreshToken">netatmo:RefreshToken (callbackFunction)</a></td>
-	<td class="summary">Send a refresh token request to netatmo server.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#netatmo:RequestStationsData">netatmo:RequestStationsData (callbackFunction)</a></td>
-	<td class="summary">RequestStationsData</td>
 	</tr>
 </table>
 
@@ -215,7 +197,21 @@
         </li>
         <li><span class="parameter">optDataKind</span>
             <span class="types"><a class="type" href="http://www.lua.org/manual/5.2/manual.html#6.4">string</a></span>
-         what kind of data you want to read
+         what kind of data you want to read </p>
+
+<p>  You can use the following string parameters for <strong>optDataKind</strong>:
+  &ndash; <code>temperature</code>:        the current temperature
+  &ndash; <code>max_temp</code>:           todays measured maximum temperature
+  &ndash; <code>min_temp</code>:           todays measured minimum temperature
+  &ndash; <code>date_min_temp</code>:      timestamp of measured minimum temperature
+  &ndash; <code>date_max_temp</code>:      timestamp of measured maximum temperature
+  &ndash; <code>temp_trend</code>:         the current temperature trend
+  &ndash; <code>humidity</code>:           current humidity
+  &ndash; <code>noise</code>:              the current noise level (only indoor module)
+  &ndash; <code>absolutepressure</code>:   current absolute pressure (only indoor module)
+  &ndash; <code>pressure_trend</code>:     current pressure trend (only indoor module)
+  &ndash; <code>pressure</code>:           current pressure (only indoor module)
+  &ndash; <code>co2</code>:                current CO2 level (only indoor module)
         </li>
         <li><span class="parameter">optWithUnits</span>
             <span class="types"><span class="type">bool</span></span>
@@ -243,117 +239,6 @@
     </ul>
 
 </dd>
-    <dt>
-    <a name = "netatmo:HasAccessToken"></a>
-    <strong>netatmo:HasAccessToken ()</strong>
-    </dt>
-    <dd>
-    Checks if access tokens are found  If no access token is found this might be the first start of the app
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if an access token has been found
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "netatmo:HasExpiredToken"></a>
-    <strong>netatmo:HasExpiredToken ()</strong>
-    </dt>
-    <dd>
-    Checks if the access token has been expired
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if token has been expired
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "netatmo:HasExpiredWeatherData"></a>
-    <strong>netatmo:HasExpiredWeatherData ()</strong>
-    </dt>
-    <dd>
-    Checks if the weather data has been expired  Netatmo weather stations do refresh their weather data every 10 minutes
- so after 10 minutes the weather data is set to be expired
-
-
-
-    <h3>Returns:</h3>
-    <ol>
-
-        true if the weather data has been expired
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "netatmo:RefreshToken"></a>
-    <strong>netatmo:RefreshToken (callbackFunction)</strong>
-    </dt>
-    <dd>
-    Send a refresh token request to netatmo server.
- The netatmo access token has a loimited lifetime of three hours.
- After three hours you have to refresh the access token, before you can
- make any further data requests.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">callbackFunction</span>
-         gets called when the access token has been refreshed
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        nothing
-    </ol>
-
-
-
-
-</dd>
-    <dt>
-    <a name = "netatmo:RequestStationsData"></a>
-    <strong>netatmo:RequestStationsData (callbackFunction)</strong>
-    </dt>
-    <dd>
-    RequestStationsData  Requests the stations weather data from Netatmo server
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">callbackFunction</span>
-         gets called when the access token has been refreshed
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        nothing
-    </ol>
-
-
-
-
-</dd>
 </dl>
 
 
@@ -362,7 +247,7 @@
 
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
-<i style="float:right;">Last updated 2016-06-10 11:26:40 </i>
+<i style="float:right;">Last updated 2016-06-14 08:53:14 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
